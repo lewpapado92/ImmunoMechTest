@@ -50,9 +50,9 @@ namespace ISAAR.MSolve.Tests.FEM
         private static void RunTest()
         {
 
-            Model model = CreateModel1(1, 1, new DynamicMaterial(.001, 0, 0, true), 0, new double[] { 0, 0, 200 }, lambdag).Item1; ;
+            Model model = CreateModel1(1, 1, new DynamicMaterial(0.001, 0, 0, true), 0, new double[] { 0, 0, 200 }, lambdag).Item1; ;
             IModelReader modelReader = CreateModel1(1, 1, new DynamicMaterial(.001, 0, 0, true), 0, new double[] { 0, 0, 200 }, lambdag).Item2;
-            string path0 = @"C:\Users\Ody\Documents\Marie Curie\comsolModels\MsolveOutput";
+            //string path0 = @"C:\Users\Ody\Documents\Marie Curie\comsolModels\MsolveOutput";
             string path3 = Path.Combine(Directory.GetCurrentDirectory(), "HyperElastiGrowthCantilever.vtu");
             //var path2 = Path.Combine(path0, $"nodes.txt");
 

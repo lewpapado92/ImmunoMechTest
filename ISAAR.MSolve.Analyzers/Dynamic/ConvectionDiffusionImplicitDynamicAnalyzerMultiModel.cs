@@ -287,6 +287,17 @@ namespace ISAAR.MSolve.Analyzers.Dynamic
             DateTime end = DateTime.Now;
             UpdateTemperature(t);
             UpdateResultStorages(start, end);
+            string path0 = Path.Combine(Directory.GetCurrentDirectory(), "MsolveOutput");
+            string path1 = Path.Combine(path0, "Temperatures");
+            var path2 = Path.Combine(path1, $"MSolveConvectionDiffusionImplicitResults.txt");
+            using (var fileName = new StreamWriter(path2, true))
+            {
+                double currentTime = t*timeStep;
+                string strTimeStep = currentTime.ToString();
+                var totalSolution = temperature[0][1];
+                string strTotalSolution = totalSolution.ToString();
+                fileName.WriteLine(strTimeStep + ", " + strTotalSolution);
+            }
             Debug.WriteLine("-------------");
         }
 
@@ -399,10 +410,11 @@ namespace ISAAR.MSolve.Analyzers.Dynamic
                     //temperature[i][id].AddIntoThis(linearSystem.Solution);
                     if ((timeStep + 1) % 1 == 0)
                     {
-                        string path0 = @"C:\Users\Ody\Documents\Marie Curie\comsolModels\MsolveOutput";
+                        string path0 = Path.Combine(Directory.GetCurrentDirectory(), "MSolveOutput");
+                        string path1 = Path.Combine(path0, "Temperatures");
                         //string path1 = @"C:\Users\Ody\Documents\Marie Curie\comsolModels\MsolveOutput\temperature0.txt";
                         //string path = @"C:\Users\Ody\Documents\Marie Curie\comsolModels\MsolveOutput";
-                        var path2 = Path.Combine(path0, $"temperature{i}-{timeStep}.txt");
+                        var path2 = Path.Combine(path1, $"temperature{i}-{timeStep}.txt");
                         var writer = new LinearAlgebra.Output.FullVectorWriter() { ArrayFormat = Array1DFormat.PlainVertical };
                         writer.WriteToFile(temperature[i][id], path2);
                         //writer.WriteToFile(temperature[id][0], path1);
